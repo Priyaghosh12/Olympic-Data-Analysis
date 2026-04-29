@@ -50,3 +50,23 @@ def fetch_medal_tally(df, year, country):
     x['Total'] = x['Gold'] + x['Silver'] + x['Bronze']
 
     return x
+
+def data_over_time(df,col):
+    nations_over_time = df.drop_duplicates(['Year',col])['Year'].value_counts().reset_index().sort_values(
+        'Year')
+    nations_over_time.rename(columns={'Year': 'Editions', 'count':col}, inplace=True)
+
+    return nations_over_time
+
+def most_successful(df, sport):
+    temp_df = df.dropna(subset=['Medal'])
+
+    if sport != 'Overall':
+        temp_df = temp_df[temp_df['Sport'] == sport]
+
+    top = temp_df['Name'].value_counts().reset_index()
+    top.columns = ['Name', 'Medals']
+
+    result = top.head(15).merge(df, on='Name', how='left')
+
+    return result[['Name', 'Sport', 'region']].drop_duplicates('Name')
