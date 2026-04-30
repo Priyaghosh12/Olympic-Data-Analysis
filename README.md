@@ -4,11 +4,11 @@ An interactive data analysis web app built using Streamlit to explore historical
 
 
 # Features
-## Medal Tally
+## 1. Medal Tally
 - View medal counts by year and country
 - Compare overall and specific Olympic performances
 
-## Overall Analysis
+## 2. Overall Analysis
 ### Key statistics:
 - Total editions
 - Host cities
@@ -18,6 +18,12 @@ An interactive data analysis web app built using Streamlit to explore historical
 - Number of events
 - Athlete participation
 - Heatmap showing sport-wise event distribution
+
+## 3. Country Wise Analysis
+This section includes three main parts:
+- Country-wise Medal Tally per Year (line plot)
+- Heatmap Analysis showing which sports a country excels in
+- Top 10 Most Successful Athletes from each country
 
 
 # Dataset link
