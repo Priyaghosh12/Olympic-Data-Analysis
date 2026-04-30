@@ -5,6 +5,7 @@ import helper
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.figure_factory as ff
 
 st.set_page_config(layout="wide")
 
@@ -28,13 +29,13 @@ if user_menu == 'Medal Tally':
 
     medal_tally = helper.fetch_medal_tally(df,selected_year,selected_country)
     if selected_year == 'Overall' and selected_country == 'Overall':
-        st.title("Overall Tally")
+        st.header("Overall Tally")
     if selected_year != 'Overall' and selected_country == 'Overall':
-        st.title("Medal TAlly in "+str(selected_year)+" olympics")
+        st.header("Medal TAlly in "+str(selected_year)+" olympics")
     if selected_year == 'Overall' and selected_country != 'Overall':
-        st.title(selected_country+" Overall Performance")
+        st.header(selected_country+" Overall Performance")
     if selected_year != 'Overall' and selected_country != 'Overall':
-        st.title(f" {selected_country} performance in {selected_year}")
+        st.header(f" {selected_country} performance in {selected_year}")
     st.table(medal_tally)
 
 if user_menu == 'Overall Analysis':
@@ -187,5 +188,20 @@ if user_menu == 'Country-Wise Analysis':
     st.title("Top 10 Athletes of "+selected_country)
     top10_df = helper.most_successful_countrywise(df,selected_country)
     st.table(top10_df)
+
+if user_menu == 'Athlete-Wise Analysis':
+    athlete_df = df.drop_duplicates(subset=['Name', 'region'])
+
+    x1 = athlete_df['Age'].dropna()
+    x2 = athlete_df[athlete_df['Medal'] == 'Gold']['Age'].dropna()
+    x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
+    x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
+
+    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalist', 'Silver Medalist', 'Bronze Medalist'],
+                             show_hist=False, show_rug=False)
+    fig.show()
+    fig.update_layout(autosize=False,width=1000,height=600)
+    st.header("Distribution of Age")
+    st.plotly_chart(fig)
 
 
