@@ -105,3 +105,16 @@ def country_event_heatmap(df, country):
         return None
 
     return pt
+
+
+def most_successful_countrywise(df, country):
+    temp_df = df.dropna(subset=['Medal'])
+
+    temp_df = temp_df[temp_df['region'] == country]
+
+    top = temp_df['Name'].value_counts().reset_index()
+    top.columns = ['Name', 'Medals']
+
+    result = top.head(10).merge(df, on='Name', how='left')
+
+    return result[['Name', 'Medals', 'Sport']].drop_duplicates('Name')
