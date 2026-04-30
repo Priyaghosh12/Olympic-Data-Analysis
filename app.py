@@ -142,5 +142,46 @@ if user_menu == 'Overall Analysis':
     x = helper.most_successful(df,selected_sport)
     st.table(x)
 
+if user_menu == 'Country-Wise Analysis':
+
+    st.sidebar.title("Country-Wise Analysis")
+
+    country_list = df['region'].dropna().unique().tolist()
+    country_list.sort()
+    selected_country = st.sidebar.selectbox('Select a Country', country_list)
+
+    country_df = helper.yearwise_medal_tally(df, selected_country)
+
+    st.header(selected_country + " Medal Tally over the years")
+
+    if country_df is None:
+        st.info(f"{selected_country} has no recorded medal history.")
+    else:
+        fig = px.line(
+            country_df,
+            x='Year',
+            y='Medal'
+        )
+        fig.update_layout(
+            template='simple_white',
+            height=450,
+            margin=dict(l=10, r=10, t=30, b=10),
+            xaxis_title="Year",
+            yaxis_title="Medal"
+        )
+        fig.update_traces(
+            line=dict(width=2),
+            hovertemplate="Year: %{x}<br>Medals: %{y}<extra></extra>"
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    st.header(selected_country + " excels in the following sports")
+    pt = helper.country_event_heatmap(df, selected_country)
+    if pt is None:
+        st.warning("No medal data available for this country")
+    else:
+        fig, ax = plt.subplots(figsize=(20, 20))
+        sns.heatmap(pt, annot=True, ax=ax)
+        st.pyplot(fig)
 
 

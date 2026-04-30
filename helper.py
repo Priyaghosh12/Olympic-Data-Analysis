@@ -70,3 +70,38 @@ def most_successful(df, sport):
     result = top.head(15).merge(df, on='Name', how='left')
 
     return result[['Name', 'Sport', 'region']].drop_duplicates('Name')
+
+def yearwise_medal_tally(df, country):
+    temp_df = df.dropna(subset=['Medal']).copy()
+
+    temp_df = temp_df.drop_duplicates(subset=['Team', 'NOC', 'Games', 'Year', 'City', 'Sport', 'Event', 'Medal'])
+    final_df = temp_df[temp_df['region'] == country]
+
+    if final_df.empty:
+        return None
+
+    final_df = final_df.groupby('Year').count()['Medal'].reset_index()
+    if final_df.empty:
+        return None
+
+    return final_df
+
+def country_event_heatmap(df, country):
+    temp_df = df.dropna(subset=['Medal']).copy()
+
+    temp_df = temp_df.drop_duplicates(subset=['Team', 'NOC', 'Games', 'Year', 'City', 'Sport', 'Event', 'Medal'])
+    final_df = temp_df[temp_df['region'] == country]
+
+    if final_df.empty:
+        return None
+    pt = final_df.pivot_table(
+        index='Sport',
+        columns='Year',
+        values='Medal',
+        aggfunc='count'
+    ).fillna(0)
+
+    if pt.empty:
+        return None
+
+    return pt
