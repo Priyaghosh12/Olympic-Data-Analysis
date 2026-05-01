@@ -25,6 +25,11 @@ This section includes three main parts:
 - Heatmap Analysis showing which sports a country excels in
 - Top 10 Most Successful Athletes from each country
 
+## 4. Athlete-wise Analysis
+- Distribution of athletes' ages
+- Age distribution across different sports
+- Relationship between athletes’ height and weight (scatter plot)
+
 
 # Dataset link
 
