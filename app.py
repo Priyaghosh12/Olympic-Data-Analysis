@@ -204,4 +204,22 @@ if user_menu == 'Athlete-Wise Analysis':
     st.header("Distribution of Age")
     st.plotly_chart(fig)
 
+    x = []
+    name = []
+    famous_sports = ['Basketball', 'Judo', 'Football', 'Tug-Of-War', 'Athletics', 'Swimming',
+                     'Badminton', 'Sailing', 'Gymnastics', 'Art Competitions', 'Handball',
+                     'Weightlifting', 'Wrestling', 'Water Polo', 'Hockey', 'Rowing', 'Fencing',
+                     'Equestrianism', 'Shooting', 'Boxing', 'Taekwondo', 'Cycling', 'Diving',
+                     'Canoeing', 'Tennis', 'Modern Pentathlon', 'Golf', 'Softball', 'Archery',
+                     'Volleyball', 'Synchronized Swimming', 'Table Tennis', 'Baseball',
+                     'Rhythmic Gymnastics', 'Rugby Sevens', 'Trampolining', 'Beach Volleyball',
+                     'Triathlon', 'Rugby', 'Lacrosse', 'Polo', 'Cricket', 'Ice Hockey']
+    for sport in famous_sports:
+        temp_df = athlete_df[athlete_df['Sport'] == sport]
+        x.append(temp_df[temp_df['Medal'] == 'Gold']['Age'].dropna())
+        name.append(sport)
 
+    fig = ff.create_distplot(x, name, show_hist=False, show_rug=False)
+    fig.update_layout(autosize=False, width=1000, height=600)
+    st.header("Distribution of Age wrt Sports(Gold Medalist)")
+    st.plotly_chart(fig)
