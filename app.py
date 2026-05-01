@@ -163,8 +163,7 @@ if user_menu == 'Country-Wise Analysis':
             x='Year',
             y='Medal'
         )
-        fig.update_layout(
-            template='simple_white',
+        fig.update_layout(template='simple_white',
             height=450,
             margin=dict(l=10, r=10, t=30, b=10),
             xaxis_title="Year",
@@ -223,3 +222,17 @@ if user_menu == 'Athlete-Wise Analysis':
     fig.update_layout(autosize=False, width=1000, height=600)
     st.header("Distribution of Age wrt Sports(Gold Medalist)")
     st.plotly_chart(fig)
+
+    sport_list = sorted(df['Sport'].dropna().unique().tolist())
+    sport_list.insert(0, 'Overall')
+    st.header("Height vs Weight")
+    selected_sport = st.selectbox('Select a Sport', sport_list)
+    filtered_df = helper.weight_vs_height(df, selected_sport)
+    fig, ax = plt.subplots()
+    sns.scatterplot(data=filtered_df,x='Weight',y='Height',hue='Medal',style='Sex',s=60,ax=ax)
+    ax.set_title(f'Height vs Weight Analysis ({selected_sport})')
+    ax.set_xlabel('Weight (kg)')
+    ax.set_ylabel('Height (cm)')
+    ax.legend(title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left')
+
+    st.pyplot(fig)
