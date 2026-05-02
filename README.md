@@ -4,33 +4,53 @@ An interactive data analysis web app built using Streamlit to explore historical
 
 
 # Features
+
 ## 1. Medal Tally
 - View medal counts by year and country
-- Compare overall and specific Olympic performances
+- Compare overall and year-specific Olympic performance
+- Interactive filtering options
 
 ## 2. Overall Analysis
-### Key statistics:
-- Total editions
-- Host cities
-- Sports, events, athletes, and nations
-- Trends over time:
-- Participating nations
-- Number of events
-- Athlete participation
-- Heatmap showing sport-wise event distribution
 
-## 3. Country Wise Analysis
-This section includes three main parts:
-- Country-wise Medal Tally per Year (line plot)
-- Heatmap Analysis showing which sports a country excels in
-- Top 10 Most Successful Athletes from each country
+**Key Statistics**
+
+- Total Olympic editions
+- Number of host cities
+- Total sports and events
+- Number of athletes and participating nations
+
+**Trends Over Time**
+
+- Growth in participating nations
+- Increase in number of events
+- Athlete participation trends
+
+**Visual Insights**
+
+- Heatmap showing sport-wise event distribution across years
+
+## 3. Country-wise Analysis
+
+- Medal tally over time using line charts
+- Heatmap showing sports where a country performs best
+- Top 10 most successful athletes from each country
 
 ## 4. Athlete-wise Analysis
 - Distribution of athletes' ages
 - Age distribution across different sports
-- Relationship between athletes’ height and weight (scatter plot)
+- Relationship between height and weight using scatter plots
+- Participation trends of men and women over the years
 
+# Dataset
 
-# Dataset link
+The dataset used in this project is available at the following link:
 
 https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results?select=athlete_events.csv
+
+
+# Project Highlights
+
+- Interactive interface for data exploration
+- Multiple visualizations including line charts, heatmaps, and scatter plots
+- Uses a real-world dataset covering more than 120 years of Olympic history
+- Clean and modular code structure
