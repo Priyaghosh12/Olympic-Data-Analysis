@@ -54,3 +54,9 @@ https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-a
 - Multiple visualizations including line charts, heatmaps, and scatter plots
 - Uses a real-world dataset covering more than 120 years of Olympic history
 - Clean and modular code structure
+
+## Live demo
+
+The app has been successfully deployed on Streamlit Cloud and is publicly accessible. You can explore it using the link below:
+
+https://olympic-data-analysis-5skn5gcvj4vypzj7zvoutm.streamlit.app/
