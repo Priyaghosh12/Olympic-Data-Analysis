@@ -15,6 +15,7 @@ region_df = pd.read_csv('noc_regions.csv')
 df = Olympic_Preprocessor.preprocess(df,region_df)
 
 st.sidebar.title("Olympics Analysis")
+st.sidebar.image("https://miro.medium.com/0*n4NPUUqqkVYCUWgt.png")
 user_menu = st.sidebar.radio(
     'Select an Option',
     ('Medal Tally','Overall Analysis','Country-Wise Analysis','Athlete-Wise Analysis')
@@ -236,3 +237,8 @@ if user_menu == 'Athlete-Wise Analysis':
     ax.legend(title='Legend', bbox_to_anchor=(1.05, 1), loc='upper left')
 
     st.pyplot(fig)
+
+    st.header("Men vs Women Participation Over the Year")
+    final = helper.men_vs_women(df)
+    fig = px.line(final, x = 'Year', y = ['Male','Female'])
+    st.plotly_chart(fig)
