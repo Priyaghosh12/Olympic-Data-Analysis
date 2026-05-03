@@ -159,17 +159,8 @@ if user_menu == 'Country-Wise Analysis':
     if country_df is None:
         st.info(f"{selected_country} has no recorded medal history.")
     else:
-        fig = px.line(
-            country_df,
-            x='Year',
-            y='Medal'
-        )
-        fig.update_layout(template='simple_white',
-            height=450,
-            margin=dict(l=10, r=10, t=30, b=10),
-            xaxis_title="Year",
-            yaxis_title="Medal"
-        )
+        fig = px.line(country_df,x='Year',y='Medal')
+        fig.update_layout(template='simple_white',height=450,margin=dict(l=10, r=10, t=30, b=10),xaxis_title="Year",yaxis_title="Medal")
         fig.update_traces(
             line=dict(width=2),
             hovertemplate="Year: %{x}<br>Medals: %{y}<extra></extra>"
