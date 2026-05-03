@@ -71,67 +71,30 @@ if user_menu == 'Overall Analysis':
         x='Editions',
         y='region'
     )
-    fig.update_layout(
-        template='simple_white',
-        height=450,
-        margin=dict(l=10, r=10, t=30, b=10),
-        xaxis_title="Year",
-        yaxis_title="Number of countries"
-    )
-    fig.update_traces(
-        line=dict(width=2),
-        hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>"
-    )
+    fig.update_layout(template='simple_white',height=450,margin=dict(l=10, r=10, t=30, b=10),xaxis_title="Year",yaxis_title="Number of countries")
+    fig.update_traces(line=dict(width=2),hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>")
     st.plotly_chart(fig, use_container_width=True)
 
     events_over_time = helper.data_over_time(df, 'Event')
     st.header("Events Over Time")
     st.metric("Max Events (Year)", int(events_over_time['Event'].max()))
-    fig = px.line(
-        events_over_time,
-        x='Editions',
-        y='Event'
-    )
-    fig.update_layout(
-        template='simple_white',
-        height=450,
-        margin=dict(l=10, r=10, t=30, b=10),
-        xaxis_title="Year",
-        yaxis_title="Number of Events"
-    )
-    fig.update_traces(
-        line=dict(width=2),
-        hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>"
-    )
+    fig = px.line(events_over_time,x='Editions',y='Event')
+    fig.update_layout(template='simple_white',height=450,margin=dict(l=10, r=10, t=30, b=10),xaxis_title="Year",yaxis_title="Number of Events")
+    fig.update_traces(line=dict(width=2),hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>")
     st.plotly_chart(fig, use_container_width=True)
 
     athletes_over_time = helper.data_over_time(df, 'Name')
     st.header("Athletes over the years")
     st.metric("Max Athletes participated(Year)", int(events_over_time['Event'].max()))
-    fig = px.line(
-        athletes_over_time,
-        x='Editions',
-        y='Name'
-    )
-    fig.update_layout(
-        template='simple_white',
-        height=450,
-        margin=dict(l=10, r=10, t=30, b=10),
-        xaxis_title="Year",
-        yaxis_title="Number of Athletes"
-    )
-    fig.update_traces(
-        line=dict(width=2),
-        hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>"
-    )
+    fig = px.line(athletes_over_time,x='Editions',y='Name')
+    fig.update_layout(template='simple_white',height=450,margin=dict(l=10, r=10, t=30, b=10),xaxis_title="Year",yaxis_title="Number of Athletes")
+    fig.update_traces(line=dict(width=2),hovertemplate="Year: %{x}<br>Events: %{y}<extra></extra>")
     st.plotly_chart(fig, use_container_width=True)
 
     st.header("Number of Events over time(Every Sport)")
     fig,ax = plt.subplots(figsize=(20,20))
     x = df.drop_duplicates(['Year', 'Sport', 'Event'])
-    ax = sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype('int'),
-                annot=True)
-
+    ax = sns.heatmap(x.pivot_table(index='Sport', columns='Year', values='Event', aggfunc='count').fillna(0).astype('int'),annot=True)
     st.pyplot(fig)
 
 
@@ -188,8 +151,7 @@ if user_menu == 'Athlete-Wise Analysis':
     x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
     x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
 
-    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalist', 'Silver Medalist', 'Bronze Medalist'],
-                             show_hist=False, show_rug=False)
+    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalist', 'Silver Medalist', 'Bronze Medalist'],show_hist=False, show_rug=False)
     fig.show()
     fig.update_layout(autosize=False,width=1000,height=600)
     st.header("Distribution of Age")
